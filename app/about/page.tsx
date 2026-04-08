@@ -2,7 +2,7 @@ import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { Container } from '@/components/layout/Container';
 import { SectionHeader } from '@/components/ui/SectionHeader';
-import { Card } from '@/components/ui/Card';
+import { Card } from '@/components/ui/card';
 import { Users, BookOpen, GraduationCap, Target } from 'lucide-react';
 
 export const metadata = {
