@@ -164,25 +164,37 @@ export default function ContactPage() {
                   </h3>
                   <div className="space-y-2 text-muted-foreground">
                     <p>
-                      <span className="font-semibold text-foreground">
-                        Monday - Friday:{' '}
-                      </span>
+                      <span className="font-semibold text-foreground">Monday - Friday: </span>
                       8:00 AM - 5:00 PM
                     </p>
                     <p>
-                      <span className="font-semibold text-foreground">
-                        Saturday:{' '}
-                      </span>
+                      <span className="font-semibold text-foreground">Saturday: </span>
                       9:00 AM - 12:00 PM
                     </p>
                     <p>
-                      <span className="font-semibold text-foreground">
-                        Sunday:{' '}
-                      </span>
+                      <span className="font-semibold text-foreground">Sunday: </span>
                       Closed
                     </p>
                   </div>
                 </div>
+              </div>
+            </Card>
+          </div>
+
+          {/* Map */}
+          <div className="max-w-2xl mx-auto mt-10">
+            <Card className="overflow-hidden">
+              <div className="w-full h-72">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3987.5!2d30.0619!3d-1.9441!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMcKwNTYnMzguOCJTIDMwwrAwMycyMi44IkU!5e0!3m2!1sen!2srw!4v1620000000000!5m2!1sen!2srw"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="GS Cyahafi TSS Location"
+                />
               </div>
             </Card>
           </div>
