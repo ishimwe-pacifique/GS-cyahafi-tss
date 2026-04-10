@@ -11,8 +11,9 @@ export default function Home() {
       <Navigation />
       <HeroSection />
       <LatestGallerySection />
-      <StoriesSection />
       <TestimonialSection />
+      <StoriesSection />
+      
       <Footer />
     </div>
   );

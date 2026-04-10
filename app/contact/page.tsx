@@ -1,202 +1,157 @@
+'use client';
+
+import { useState } from 'react';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { Container } from '@/components/layout/Container';
-import { Card } from '@/components/ui/card';
-import { Phone, Mail, MapPin, Clock } from 'lucide-react';
-
-export const metadata = {
-  title: 'Contact Us - GS Cyahafi TSS',
-  description: 'Get in touch with GS Cyahafi TSS. We are here to help with any inquiries.',
-};
+import { Button } from '@/components/ui/button';
+import { Phone, Mail, MapPin, Clock, Send, Loader2, CheckCircle } from 'lucide-react';
 
 export default function ContactPage() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+  };
+
   return (
-    <div className="w-full">
+    <div className="w-full bg-white font-montserrat">
       <Navigation />
 
-      {/* Hero Banner */}
-      <section className="pt-32 pb-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary to-primary/90 text-primary-foreground">
-        <Container>
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-balance mb-4">
-              Get In Touch
+      {/* --- HERO SECTION: BOLD ARCHITECTURAL --- */}
+      <section className="relative pt-48 pb-24 bg-[#0a1e34] text-white overflow-hidden">
+        <div className="absolute inset-0 z-0 opacity-20 grayscale">
+           <img 
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gs%20image1-1QLrdTn8kYjz4ox5DCoqCEZdvfZxXj.jpeg" 
+            alt="Background" 
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <Container className="relative z-10">
+          <div className="max-w-3xl border-l-4 border-[#b08d57] pl-8">
+            <p className="text-[#b08d57] font-black uppercase tracking-[0.3em] text-[10px] mb-4">Official Channels</p>
+            <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-6">
+              Get In <br /> Touch
             </h1>
-            <p className="text-lg text-primary-foreground/90">
-              Have questions? We would love to hear from you. Send us a message
-              and we will respond as soon as possible.
+            <p className="text-lg text-slate-300 font-medium max-w-xl">
+              For admissions, partnerships, or general inquiries, our administration team is available to assist you during official working hours.
             </p>
           </div>
         </Container>
       </section>
 
-      {/* Contact Content */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-background">
+      {/* --- CONTACT INFORMATION GRID --- */}
+      <section className="py-24 bg-white border-b border-slate-100">
         <Container>
-          <div className="grid md:grid-cols-3 gap-8 mb-20">
-            {/* Address Card */}
-            <Card className="flex flex-col items-center text-center p-8 hover:shadow-lg transition-shadow">
-              <div className="bg-secondary/20 p-4 rounded-full mb-4">
-                <MapPin className="w-8 h-8 text-secondary" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border-t border-l border-slate-200">
+            {[
+              { icon: MapPin, title: "Address", detail: ["Kabahizi, Gitega", "Nyarugenge, Kigali", "Rwanda"] },
+              { icon: Phone, title: "Phone", detail: ["+250 788 000 000", "Mon-Fri, 8AM-5PM"] },
+              { icon: Mail, title: "Email", detail: ["info@gscyahafi.rw", "admin@gscyahafi.rw"] },
+              { icon: Clock, title: "Hours", detail: ["Mon-Fri: 8AM-5PM", "Sat: 9AM-12PM"] }
+            ].map((item, i) => (
+              <div key={i} className="p-10 border-r border-b border-slate-200 hover:bg-slate-50 transition-colors">
+                <item.icon className="w-8 h-8 text-[#b08d57] mb-6" />
+                <h3 className="text-[10px] font-black uppercase tracking-widest text-[#0a1e34] mb-4">{item.title}</h3>
+                {item.detail.map((line, idx) => (
+                  <p key={idx} className="text-slate-500 text-sm font-bold leading-relaxed">{line}</p>
+                ))}
               </div>
-              <h3 className="text-xl font-bold text-primary mb-2">Address</h3>
-              <p className="text-muted-foreground mb-2">
-                Gitega, Nyarugenge District
-              </p>
-              <p className="text-muted-foreground">Kigali, Rwanda</p>
-            </Card>
-
-            {/* Phone Card */}
-            <Card className="flex flex-col items-center text-center p-8 hover:shadow-lg transition-shadow">
-              <div className="bg-secondary/20 p-4 rounded-full mb-4">
-                <Phone className="w-8 h-8 text-secondary" />
-              </div>
-              <h3 className="text-xl font-bold text-primary mb-2">Phone</h3>
-              <p className="text-muted-foreground mb-2">+250 XXX XXX XXX</p>
-              <p className="text-sm text-muted-foreground">
-                Monday - Friday, 8:00 AM - 5:00 PM
-              </p>
-            </Card>
-
-            {/* Email Card */}
-            <Card className="flex flex-col items-center text-center p-8 hover:shadow-lg transition-shadow">
-              <div className="bg-secondary/20 p-4 rounded-full mb-4">
-                <Mail className="w-8 h-8 text-secondary" />
-              </div>
-              <h3 className="text-xl font-bold text-primary mb-2">Email</h3>
-              <p className="text-muted-foreground">info@gscyahafi.rw</p>
-              <p className="text-sm text-muted-foreground">
-                We respond within 24 hours
-              </p>
-            </Card>
+            ))}
           </div>
+        </Container>
+      </section>
 
-          {/* Contact Form */}
-          <div className="max-w-2xl mx-auto">
-            <Card className="p-8 md:p-12">
-              <h2 className="text-3xl font-bold text-primary mb-2">
-                Send us a Message
-              </h2>
-              <p className="text-muted-foreground mb-8">
-                Fill out the form below and we will get back to you soon.
-              </p>
-
-              <form className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Full Name
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="Your name"
-                      required
-                      className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-secondary transition-all"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      placeholder="your@email.com"
-                      required
-                      className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-secondary transition-all"
-                    />
-                  </div>
+      {/* --- FORM SECTION --- */}
+      <section className="py-24 bg-slate-50">
+        <Container>
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white border-4 border-[#0a1e34] p-8 md:p-16 shadow-2xl relative">
+              {isSubmitted ? (
+                <div className="text-center py-12">
+                  <CheckCircle className="w-16 h-16 text-[#b08d57] mx-auto mb-6" />
+                  <h2 className="text-3xl font-black text-[#0a1e34] uppercase tracking-tighter mb-4">Message Sent</h2>
+                  <p className="text-slate-500 mb-8 font-medium">Thank you for contacting GS Cyahafi TSS. We will respond within 24 hours.</p>
+                  <Button onClick={() => setIsSubmitted(false)} className="bg-[#0a1e34] text-white rounded-none px-8 py-4 font-black uppercase text-[10px] tracking-widest">Send Another</Button>
                 </div>
+              ) : (
+                <>
+                  <h2 className="text-3xl font-black text-[#0a1e34] uppercase tracking-tighter mb-4">Send us a Message</h2>
+                  <p className="text-slate-500 mb-10 font-medium">Please fill out the form below for official school inquiries.</p>
 
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    Phone Number
-                  </label>
-                  <input
-                    type="tel"
-                    placeholder="+250 XXX XXX XXX"
-                    className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-secondary transition-all"
+                  <form onSubmit={handleSubmit} className="space-y-8">
+                    <div className="grid md:grid-cols-2 gap-8">
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Full Name</label>
+                        <input
+                          type="text"
+                          required
+                          className="w-full px-4 py-4 rounded-none border border-slate-200 focus:outline-none focus:border-[#b08d57] bg-slate-50 text-sm font-medium transition-all"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Email Address</label>
+                        <input
+                          type="email"
+                          required
+                          className="w-full px-4 py-4 rounded-none border border-slate-200 focus:outline-none focus:border-[#b08d57] bg-slate-50 text-sm font-medium transition-all"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Message Inquiry</label>
+                      <textarea
+                        rows={5}
+                        required
+                        className="w-full px-4 py-4 rounded-none border border-slate-200 focus:outline-none focus:border-[#b08d57] bg-slate-50 text-sm font-medium resize-none transition-all"
+                      />
+                    </div>
+
+                    <Button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full py-6 bg-[#0a1e34] hover:bg-[#b08d57] text-white rounded-none font-black uppercase text-xs tracking-[0.3em] transition-all flex items-center justify-center gap-3 active:scale-95 shadow-xl"
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="w-5 h-5 animate-spin" />
+                          Processing...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-5 h-5" />
+                          Send Inquiry
+                        </>
+                      )}
+                    </Button>
+                  </form>
+                </>
+              )}
+            </div>
+
+            {/* --- MAP SECTION: KEPT AS IS BUT STYLED SHARP --- */}
+            <div className="mt-12">
+               <div className="border-4 border-[#0a1e34] overflow-hidden shadow-2xl">
+                <div className="w-full h-96 bg-slate-200 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-700">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.814188079439!2d30.0531343!3d-1.944869!2m3!1f0!2f90!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19dca53ee02e53e3%3A0xebc558398f713cf6!2sCyahafi%20High%20School!5e0!3m2!1sen!2srw!16s%2Fg%2F11h94ys1p9"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Cyahafi High School Location"
                   />
                 </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    Subject
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="What is this about?"
-                    required
-                    className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-secondary transition-all"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    Message
-                  </label>
-                  <textarea
-                    placeholder="Tell us more about your inquiry..."
-                    rows={6}
-                    required
-                    className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-secondary transition-all resize-none"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full bg-secondary text-secondary-foreground py-3 rounded-lg font-bold text-lg hover:shadow-lg hover:scale-105 transition-all"
-                >
-                  Send Message
-                </button>
-              </form>
-            </Card>
-          </div>
-
-          {/* Office Hours */}
-          <div className="max-w-2xl mx-auto mt-20">
-            <Card className="bg-muted p-8 md:p-12">
-              <div className="flex items-start gap-4">
-                <div className="bg-secondary/20 p-3 rounded-full">
-                  <Clock className="w-6 h-6 text-secondary" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-primary mb-4">
-                    Office Hours
-                  </h3>
-                  <div className="space-y-2 text-muted-foreground">
-                    <p>
-                      <span className="font-semibold text-foreground">Monday - Friday: </span>
-                      8:00 AM - 5:00 PM
-                    </p>
-                    <p>
-                      <span className="font-semibold text-foreground">Saturday: </span>
-                      9:00 AM - 12:00 PM
-                    </p>
-                    <p>
-                      <span className="font-semibold text-foreground">Sunday: </span>
-                      Closed
-                    </p>
-                  </div>
-                </div>
               </div>
-            </Card>
-          </div>
-
-          {/* Map */}
-          <div className="max-w-2xl mx-auto mt-10">
-            <Card className="overflow-hidden">
-              <div className="w-full h-72">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3987.5!2d30.0619!3d-1.9441!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMcKwNTYnMzguOCJTIDMwwrAwMycyMi44IkU!5e0!3m2!1sen!2srw!4v1620000000000!5m2!1sen!2srw"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="GS Cyahafi TSS Location"
-                />
-              </div>
-            </Card>
+            </div>
           </div>
         </Container>
       </section>

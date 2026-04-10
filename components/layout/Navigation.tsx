@@ -18,7 +18,8 @@ export function Navigation() {
   };
 
   const navItems = [
-    { label: 'About', id: 'about' },
+    { label: 'Home', href: '/' },
+    { label: 'About', href: '/about' },
     { label: 'Academic Levels', id: 'levels' },
     { label: 'TVET Programs', id: 'tvet' },
     { label: 'Gallery', href: '/gallery' },
@@ -56,13 +57,14 @@ export function Navigation() {
                 </button>
               );
             })}
-            <Button
-              variant="primary"
-              onClick={() => handleNavClick('contact')}
-              className="text-sm"
-            >
-              Contact
-            </Button>
+            <Link href="/contact">
+              <Button
+                variant="primary"
+                className="text-sm"
+              >
+                Contact
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -102,13 +104,14 @@ export function Navigation() {
                 </button>
               );
             })}
-            <Button
-              variant="primary"
-              onClick={() => handleNavClick('contact')}
-              className="text-sm w-fit"
-            >
-              Contact
-            </Button>
+            <Link href="/contact" onClick={() => setIsMenuOpen(false)}>
+              <Button
+                variant="primary"
+                className="text-sm w-fit"
+              >
+                Contact
+              </Button>
+            </Link>
           </div>
         )}
       </Container>
