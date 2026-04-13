@@ -1,30 +1,74 @@
+'use client';
+
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { Container } from '@/components/layout/Container';
-import { Card } from '@/components/ui/card';
-import { Users, BookOpen, GraduationCap, Target, Mail, Linkedin } from 'lucide-react';
-
-export const metadata = {
-  title: 'About GS Cyahafi TSS | Leading Secondary Education in Kigali',
-  description: 'Learn about our mission, vision, and the dedicated team driving technical and academic excellence at GS Cyahafi TSS.',
-};
+import { BookOpen, GraduationCap, Target, Mail, Linkedin, Phone } from 'lucide-react';
+import { useEffect } from 'react';
 
 const teamMembers = [
-  { name: "Executive Name", role: "School Manager", image: "https://i.pravatar.cc/150?u=1" },
-  { name: "Director Name", role: "Director of Studies", image: "https://i.pravatar.cc/150?u=2" },
-  { name: "Dean Name", role: "Dean of Students", image: "https://i.pravatar.cc/150?u=3" },
-  { name: "Head TVET", role: "TVET Coordinator", image: "https://i.pravatar.cc/150?u=4" },
-  { name: "Admin Name", role: "School Accountant", image: "https://i.pravatar.cc/150?u=5" },
-  { name: "Staff Name", role: "Quality Assurance", image: "https://i.pravatar.cc/150?u=6" },
-  { name: "Staff Name", role: "Secretary", image: "https://i.pravatar.cc/150?u=7" },
+  { 
+    name: "Francoise Nyiraneza Kaburame", 
+    role: "Head Teacher", 
+    phone: "+250 788 000 000", 
+    image: "/team/head-teacher.jpg" // Put your image in public/team/head-teacher.jpg
+  },
+  { 
+    name: "Nahimana Didie", 
+    role: "DOS General", 
+    phone: "+250 788 000 000", 
+    image: "/team/dos-general.jpg" 
+  },
+  { 
+    name: "Tuyumvire Lois", 
+    role: "DOS TSS", 
+    phone: "+250 788 000 000", 
+    image: "/team/dos-tss.jpg" 
+  },
+  { 
+    name: "Peter", 
+    role: "DOD", 
+    phone: "+250 788 000 000", 
+    image: "/team/dod.jpg" 
+  },
+  { 
+    name: "BOSCO", 
+    role: "Accountant", 
+    phone: "+250 788 000 000", 
+    image: "/team/accountant.jpg" 
+  },
+  { 
+    name: "XXXXXXXXX", 
+    role: "Secretary", 
+    phone: "+250 788 000 000", 
+    image: "/team/secretary.jpg" 
+  },
+  { 
+    name: "Ishimwe Pacifique", 
+    role: "IT Support", 
+    phone: "+250 784 196 391", 
+    image: "/team/it-support.jpg" 
+  },
 ];
 
 export default function AboutPage() {
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash === '#team') {
+      const element = document.getElementById('team');
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  }, []);
+
   return (
     <div className="w-full bg-white font-montserrat">
       <Navigation />
 
-      {/* --- HERO SECTION: BOLD & MINIMALIST --- */}
+      {/* --- HERO SECTION --- */}
       <section className="pt-40 pb-20 bg-[#0a1e34] text-white">
         <Container>
           <div className="border-l-4 border-[#b08d57] pl-8">
@@ -70,7 +114,7 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      {/* --- MISSION & VISION: ARCHITECTURAL --- */}
+      {/* --- MISSION & VISION --- */}
       <section className="py-24 bg-slate-50">
         <Container>
           <div className="grid md:grid-cols-2 gap-0 border-4 border-[#0a1e34]">
@@ -92,8 +136,8 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      {/* --- LEADERSHIP TEAM (7 PEOPLE) --- */}
-      <section className="py-24 bg-white">
+      {/* --- LEADERSHIP TEAM --- */}
+      <section id="team" className="py-24 bg-white">
         <Container>
           <div className="text-center mb-20">
             <p className="text-[#b08d57] font-bold uppercase tracking-[0.3em] text-[10px] mb-4">Dedicated Leadership</p>
@@ -102,16 +146,22 @@ export default function AboutPage() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16">
             {teamMembers.map((member, i) => (
-              <div key={i} className={`group ${i === 6 ? 'lg:col-start-2' : ''}`}>
-                <div className="relative h-80 w-full mb-6 overflow-hidden">
+              <div key={i} className={`group ${i === 6 ? 'lg:col-start-2 lg:col-span-2 flex items-center gap-8' : ''}`}>
+                <div className={`relative overflow-hidden ${i === 6 ? 'h-64 w-64 flex-shrink-0' : 'h-80 w-full mb-6'}`}>
                   <img src={member.image} alt={member.name} className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500" />
                   <div className="absolute inset-0 border-[12px] border-white/0 group-hover:border-white/20 transition-all" />
                 </div>
                 <div className="border-l-2 border-[#b08d57] pl-4">
-                  <h4 className="text-lg font-black text-[#0a1e34] uppercase leading-none mb-2">{member.name}</h4>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-4">{member.role}</p>
+                  <h4 className="text-lg font-black text-[#0a1e34] uppercase leading-tight mb-1">{member.name}</h4>
+                  <p className="text-[10px] font-bold text-[#b08d57] uppercase tracking-widest mb-3">{member.role}</p>
+                  
+                  <div className="flex items-center gap-2 mb-4 text-slate-500 group-hover:text-[#0a1e34] transition-colors">
+                    <Phone size={14} className="text-[#b08d57]" />
+                    <span className="text-xs font-bold">{member.phone}</span>
+                  </div>
+
                   <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
                     <Mail size={14} className="text-slate-400 hover:text-[#b08d57] cursor-pointer" />
                     <Linkedin size={14} className="text-slate-400 hover:text-[#b08d57] cursor-pointer" />

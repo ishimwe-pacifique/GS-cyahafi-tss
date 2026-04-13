@@ -106,7 +106,7 @@ export function Footer() {
               </li>
               <li className="flex flex-col">
                 <span className="text-xs font-bold uppercase text-accent/80">Email</span>
-                <span>info@gscyahafi.rw</span>
+                <span>gscyahafi@gmail.com</span>
               </li>
               <li className="flex flex-col">
                 <span className="text-xs font-bold uppercase text-accent/80">Location</span>

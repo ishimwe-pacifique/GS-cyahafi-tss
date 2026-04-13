@@ -51,8 +51,8 @@ export default function ContactPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border-t border-l border-slate-200">
             {[
               { icon: MapPin, title: "Address", detail: ["Kabahizi, Gitega", "Nyarugenge, Kigali", "Rwanda"] },
-              { icon: Phone, title: "Phone", detail: ["+250 788 000 000", "Mon-Fri, 8AM-5PM"] },
-              { icon: Mail, title: "Email", detail: ["info@gscyahafi.rw", "admin@gscyahafi.rw"] },
+              { icon: Phone, title: "Phone", detail: ["+250 722 792 705", "Mon-Fri, 8AM-5PM"] },
+              { icon: Mail, title: "Email", detail: ["gscyahafi@gmail.com", ""] },
               { icon: Clock, title: "Hours", detail: ["Mon-Fri: 8AM-5PM", "Sat: 9AM-12PM"] }
             ].map((item, i) => (
               <div key={i} className="p-10 border-r border-b border-slate-200 hover:bg-slate-50 transition-colors">

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useScrollToSection } from '@/hooks/useScrollToSection';
@@ -10,6 +10,7 @@ import { Button } from '../ui/button';
 
 export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
   const scrollToSection = useScrollToSection();
 
   const handleNavClick = (sectionId: string) => {
@@ -19,7 +20,7 @@ export function Navigation() {
 
   const navItems = [
     { label: 'Home', href: '/' },
-    { label: 'About', href: '/about' },
+    { label: 'About', href: '/about', hasDropdown: true },
     { label: 'Academic Levels', id: 'levels' },
     { label: 'TVET Programs', id: 'tvet' },
     { label: 'Gallery', href: '/gallery' },
@@ -39,6 +40,24 @@ export function Navigation() {
           <div className="hidden md:flex items-center gap-8">
             {navItems.map((item) => {
               const isLink = 'href' in item;
+              if (item.hasDropdown) {
+                return (
+                  <div key={item.label} className="relative group">
+                    <button className="flex items-center gap-1 hover:text-accent transition-colors">
+                      {item.label}
+                      <ChevronDown className="w-4 h-4" />
+                    </button>
+                    <div className="absolute top-full left-0 mt-2 w-48 bg-primary rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                      <Link href="/about" className="block px-4 py-2 hover:bg-primary/80 text-sm">
+                        About School
+                      </Link>
+                      <Link href="/about#team" className="block px-4 py-2 hover:bg-primary/80 text-sm">
+                        Meet Our Team
+                      </Link>
+                    </div>
+                  </div>
+                );
+              }
               return isLink ? (
                 <Link
                   key={item.label}
@@ -85,6 +104,29 @@ export function Navigation() {
           <div className="md:hidden pb-4 flex flex-col gap-4">
             {navItems.map((item) => {
               const isLink = 'href' in item;
+              if (item.hasDropdown) {
+                return (
+                  <div key={item.label}>
+                    <button
+                      onClick={() => setIsAboutOpen(!isAboutOpen)}
+                      className="flex items-center justify-between w-full text-left hover:text-accent transition-colors"
+                    >
+                      {item.label}
+                      <ChevronDown className={`w-4 h-4 transition-transform ${isAboutOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {isAboutOpen && (
+                      <div className="ml-4 mt-2 flex flex-col gap-2 border-l-2 border-white/20 pl-4">
+                        <Link href="/about" className="hover:text-accent text-sm" onClick={() => setIsMenuOpen(false)}>
+                          About School
+                        </Link>
+                        <Link href="/about#team" className="hover:text-accent text-sm" onClick={() => setIsMenuOpen(false)}>
+                          Meet Our Team
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+                );
+              }
               return isLink ? (
                 <Link
                   key={item.label}

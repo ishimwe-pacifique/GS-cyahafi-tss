@@ -23,14 +23,14 @@ const galleryData = [
   },
   {
     id: 3,
-    src: '/Student1.jpeg',
+    src: '/workshop.png',
     alt: 'Practical Workshop Session',
     category: 'TVET Programs',
     flex: 'flex-[1]',
   },
   {
     id: 4,
-    src: '/image1.jpeg',
+    src: '/nursury1.jpeg',
     alt: 'Foundational Learning',
     category: 'Nursery & Primary',
     flex: 'flex-[1]',
