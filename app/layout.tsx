@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: 'GS Cyahafi TSS',
   description: 'Created with v0',
   generator: 'paccy IT',
+  icons: {
+    icon: '/logocyaha.png',
+  },
 }
 
 export default function RootLayout({
