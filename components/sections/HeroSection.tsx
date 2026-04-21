@@ -39,7 +39,7 @@ export function HeroSection() {
   };
 
   useEffect(() => {
-    const interval = setInterval(nextSlide, 8000);
+    const interval = setInterval(nextSlide, 9000);
     return () => clearInterval(interval);
   }, [nextSlide]);
 

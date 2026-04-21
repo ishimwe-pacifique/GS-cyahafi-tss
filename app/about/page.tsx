@@ -72,7 +72,6 @@ export default function AboutPage() {
       <section className="pt-40 pb-20 bg-[#0a1e34] text-white">
         <Container>
           <div className="border-l-4 border-[#b08d57] pl-8">
-            <p className="text-[#b08d57] font-black uppercase tracking-[0.3em] text-[10px] mb-4">Established Excellence</p>
             <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-6">
               Empowering <br /> Tomorrow's <br /> Workforce
             </h1>
