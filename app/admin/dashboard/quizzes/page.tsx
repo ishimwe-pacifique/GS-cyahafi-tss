@@ -1,6 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+export const dynamic = 'force-dynamic';
+
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -23,7 +25,7 @@ interface Quiz {
   createdAt: string;
 }
 
-export default function QuizzesPage() {
+function QuizzesInner() {
   const [quizzes, setQuizzes] = useState<Quiz[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
@@ -244,5 +246,17 @@ export default function QuizzesPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function QuizzesPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex justify-center py-12">
+        <Loader2 className="w-8 h-8 animate-spin text-gray-400" />
+      </div>
+    }>
+      <QuizzesInner />
+    </Suspense>
   );
 }

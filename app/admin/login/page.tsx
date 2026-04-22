@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Container } from '@/components/layout/Container';
@@ -14,10 +14,9 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const router = useRouter();
-  const searchParams = useSearchParams();
+   const router = useRouter();
 
-  useEffect(() => {
+   useEffect(() => {
     const token = localStorage.getItem('admin_token');
     if (token) {
       router.push('/admin/dashboard');

@@ -1,6 +1,8 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+export const dynamic = 'force-dynamic';
+
+import { useEffect, useState, useRef, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -29,7 +31,7 @@ interface Document {
 
 const categories = ['Syllabus', 'Schedule', 'Result', 'Form', 'Other'];
 
-export default function DocumentsPage() {
+function DocumentsInner() {
   const [documents, setDocuments] = useState<Document[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
@@ -337,5 +339,17 @@ export default function DocumentsPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function DocumentsPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex justify-center py-12">
+        <Loader2 className="w-8 h-8 animate-spin text-gray-400" />
+      </div>
+    }>
+      <DocumentsInner />
+    </Suspense>
   );
 }

@@ -1,6 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+export const dynamic = 'force-dynamic';
+
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -22,7 +24,7 @@ interface Announcement {
   createdAt: string;
 }
 
-export default function AnnouncementsPage() {
+function AnnouncementsInner() {
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
@@ -221,5 +223,17 @@ export default function AnnouncementsPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function AnnouncementsPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex justify-center py-12">
+        <Loader2 className="w-8 h-8 animate-spin text-gray-400" />
+      </div>
+    }>
+      <AnnouncementsInner />
+    </Suspense>
   );
 }
