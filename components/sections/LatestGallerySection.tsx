@@ -46,10 +46,6 @@ export function LatestGallerySection() {
       <Container>
         {/* Header Section */}
         <div className="flex flex-col mb-12">
-          <div className="flex items-center gap-3 mb-4">
-            <span className="h-px w-12 bg-[#b08d57]"></span>
-            <span className="text-[#b08d57] font-bold uppercase tracking-[0.2em] text-[10px]">Gallery</span>
-          </div>
           <h2 className="text-4xl md:text-6xl font-black text-[#0a1e34] tracking-tighter leading-none mb-6">
             Inside <span className="text-[#b08d57]">GS Cyahafi</span> TSS
           </h2>

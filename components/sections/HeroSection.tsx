@@ -6,22 +6,25 @@ import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const slides = [
   {
-    image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gs%20image1-1QLrdTn8kYjz4ox5DCoqCEZdvfZxXj.jpeg',
+    image: '/HOMEPAGE1.jpeg',
     title: 'Welcome to',
     subtitle: 'GS Cyahafi TSS',
     description: 'At GS Cyahafi TSS, we are dedicated to providing high-quality general and technical secondary education that equips our students with the skills they need for success in the workforce and in life.',
+    position: 'center 30%', // keeps faces/subjects near the top in frame
   },
   {
-    image: '/Student1.jpeg',
+    image: '/Vicentpractice.png',
     title: 'Excellence in',
     subtitle: 'Technical Training',
     description: 'Our TVET programs prepare students with hands-on practical skills for immediate employment in the modern workforce.',
+    position: 'center 5%',
   },
   {
-    image: '/image1.jpeg',
+    image: '/HOMEPAGE3.jpeg',
     title: 'Building Future',
     subtitle: 'Leaders & Innovators',
     description: "From Nursery to Secondary, we build a strong foundation for every student's academic and professional growth.",
+    position: 'center 5%',
   },
 ];
 
@@ -29,7 +32,6 @@ export function HeroSection() {
   const scrollToSection = useScrollToSection();
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Memoize nextSlide to prevent render errors
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
   }, []);
@@ -44,24 +46,29 @@ export function HeroSection() {
   }, [nextSlide]);
 
   return (
-    <section className="relative w-full h-screen min-h-[700px] flex items-center overflow-hidden font-montserrat bg-[#0a1e34]">
-      
+    <section className="relative w-full h-screen min-h-[600px] md:min-h-[700px] flex items-center overflow-hidden font-montserrat bg-[#0a1e34]">
+
       {/* 1. BACKGROUND SLIDER */}
       <div className="absolute inset-0 z-0">
         {slides.map((slide, index) => (
           <div
             key={index}
             className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              index === currentSlide ? 'opacity-100 scale-105' : 'opacity-0 scale-100'
-            } transition-transform duration-[8000ms]`}
+              index === currentSlide ? 'opacity-100' : 'opacity-0'
+            }`}
           >
             <img
               src={slide.image}
               alt={slide.subtitle}
-              className="absolute inset-0 w-full h-full object-cover"
+              className={`absolute inset-0 w-full h-full object-cover transition-transform duration-[9000ms] ease-out ${
+                index === currentSlide ? 'scale-110' : 'scale-100'
+              }`}
+              style={{ objectPosition: slide.position }}
+              loading={index === 0 ? 'eager' : 'lazy'}
             />
-            {/* Minimal overlay for clarity */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/10 to-transparent" />
+            {/* Gradient overlay for text clarity, doesn't crop the image itself */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/25 to-black/10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
           </div>
         ))}
       </div>
@@ -69,31 +76,47 @@ export function HeroSection() {
       {/* 2. NAVIGATION */}
       <button
         onClick={prevSlide}
-        className="absolute left-6 top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md text-white transition-all group active:scale-90"
+        aria-label="Previous slide"
+        className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md text-white transition-all group active:scale-90"
       >
         <ChevronLeft className="w-6 h-6 group-hover:-translate-x-1 transition-transform" />
       </button>
 
       <button
         onClick={nextSlide}
-        className="absolute right-6 top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md text-white transition-all group active:scale-90"
+        aria-label="Next slide"
+        className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md text-white transition-all group active:scale-90"
       >
         <ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
       </button>
 
-      {/* 3. CONTENT AREA - Reduced Title Font Size */}
+      {/* 3. SLIDE DOTS (helps orient users since images now sit still under a stable overlay) */}
+      <div className="absolute bottom-40 md:bottom-48 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentSlide(index)}
+            aria-label={`Go to slide ${index + 1}`}
+            className={`h-1.5 rounded-full transition-all ${
+              index === currentSlide ? 'w-8 bg-[#b08d57]' : 'w-1.5 bg-white/40 hover:bg-white/70'
+            }`}
+          />
+        ))}
+      </div>
+
+      {/* 4. CONTENT AREA */}
       <div className="relative z-10 container mx-auto px-6 md:px-16 lg:px-24 mb-20">
         <div key={currentSlide} className="max-w-3xl animate-fade-in-up">
-          <h1 className="text-white text-3xl md:text-5xl font-black leading-tight mb-4 uppercase tracking-tighter">
+          <h1 className="text-white text-3xl md:text-5xl font-black leading-tight mb-4 uppercase tracking-tighter drop-shadow-lg">
             {slides[currentSlide].title} <br />
             <span className="text-white">{slides[currentSlide].subtitle}</span>
           </h1>
 
-          <p className="max-w-xl text-gray-100 text-sm md:text-base font-medium leading-relaxed mb-10">
+          <p className="max-w-xl text-gray-100 text-sm md:text-base font-medium leading-relaxed mb-10 drop-shadow-md">
             {slides[currentSlide].description}
           </p>
 
-          <button 
+          <button
             onClick={() => scrollToSection('programs')}
             className="bg-[#b08d57] hover:bg-[#9a7b4c] text-white font-black px-10 py-4 rounded-sm transition-all flex items-center gap-3 shadow-2xl text-xs uppercase tracking-widest active:scale-95 group"
           >
@@ -102,7 +125,7 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* 4. OFFICIAL PARTNERS - Only MINEDUC, RTB, REB */}
+      {/* 5. OFFICIAL PARTNERS */}
       <div className="absolute bottom-0 left-0 right-0 z-20 flex justify-center px-4">
         <div className="bg-[#0a1e34] w-full max-w-5xl rounded-t-[2rem] p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl border-t border-white/5">
           <div className="text-white flex-shrink-0">
