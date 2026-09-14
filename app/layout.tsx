@@ -3,6 +3,7 @@ import { Montserrat } from 'next/font/google'
 
 import './globals.css'
 import { FloatingScrollTop } from '@/components/ui/FloatingScrollTop'
+import { AIChatbot } from '@/components/ui/AIChatbot'
 
 const montserrat = Montserrat({ subsets: ['latin'], variable: '--font-montserrat' })
 
@@ -25,6 +26,7 @@ export default function RootLayout({
       <body className={`${montserrat.variable} font-sans antialiased`}>
         {children}
         <FloatingScrollTop />
+        <AIChatbot />
       </body>
     </html>
   )

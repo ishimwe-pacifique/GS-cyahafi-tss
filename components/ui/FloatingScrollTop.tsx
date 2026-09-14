@@ -28,10 +28,10 @@ export function FloatingScrollTop() {
   return (
     <button
       onClick={scrollToTop}
-      className="fixed bottom-8 right-8 bg-secondary text-secondary-foreground p-3 rounded-full shadow-lg hover:bg-secondary/90 hover:scale-110 transition-all duration-300 z-50 font-[family-name:var(--font-montserrat)]"
+      className="fixed bottom-24 right-6 sm:right-8 bg-[#0a1e34] text-[#b08d57] p-3 rounded-full shadow-lg hover:bg-[#122e4d] hover:scale-110 transition-all duration-300 z-40 border border-[#b08d57]/40 font-[family-name:var(--font-montserrat)]"
       aria-label="Scroll to top"
     >
-      <ChevronUp className="w-6 h-6" />
+      <ChevronUp className="w-5 h-5" />
     </button>
   );
 }
