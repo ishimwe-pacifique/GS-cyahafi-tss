@@ -16,8 +16,8 @@ const galleryData = [
   },
   {
     id: 2,
-    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gs%20image2-GBAlBSIn3OZOriyfBaQUotKE7L5dnQ.jpeg',
-    alt: 'Advanced IT Lab Training',
+    src: '/teacher cpd.jpeg',
+    alt: 'Advanced IT Lab',
     category: 'Technical Dept',
     flex: 'flex-[1]',
   },
