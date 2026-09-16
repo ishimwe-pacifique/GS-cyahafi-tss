@@ -69,7 +69,7 @@ export default function AboutPage() {
       <Navigation />
 
       {/* --- HERO BANNER SECTION --- */}
-      <section className="pt-36 pb-16 bg-[#0a1e34] text-white">
+      <section className="pt-12 md:pt-16 pb-16 bg-[#0a1e34] text-white">
         <Container>
           <div className="grid md:grid-cols-12 gap-8 items-center">
             {/* Text Column - Orderly arranged text */}

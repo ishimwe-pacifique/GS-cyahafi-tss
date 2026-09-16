@@ -24,7 +24,7 @@ export default function ContactPage() {
       <Navigation />
 
       {/* --- HERO SECTION: BOLD ARCHITECTURAL --- */}
-      <section className="relative pt-48 pb-24 bg-[#0a1e34] text-white overflow-hidden">
+      <section className="relative pt-16 pb-24 bg-[#0a1e34] text-white overflow-hidden">
         <div className="absolute inset-0 z-0 opacity-20 grayscale">
            <img 
             src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gs%20image1-1QLrdTn8kYjz4ox5DCoqCEZdvfZxXj.jpeg" 

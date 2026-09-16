@@ -73,7 +73,7 @@ export default function GalleryPage() {
   return (
     <div className="w-full">
       <Navigation />
-      <div className="min-h-screen bg-background pt-20">
+      <div className="min-h-screen bg-background pt-8 md:pt-12">
         {/* Hero Section */}
         <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary via-primary to-primary/80 text-primary-foreground relative overflow-hidden">
           <div className="absolute inset-0 opacity-10">
