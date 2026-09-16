@@ -28,6 +28,13 @@ const slides = [
   },
 ];
 
+const partnerLogos = [
+  { src: '/seal_480x480.jpg', alt: 'MINEDUC' },
+  { src: '/logortb.jpg', alt: 'RTB' },
+  { src: '/REB_Logo.png', alt: 'REB' },
+  { src: '/KOICA.png', alt: 'KOICA' },
+];
+
 export function HeroSection() {
   const scrollToSection = useScrollToSection();
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -53,16 +60,14 @@ export function HeroSection() {
         {slides.map((slide, index) => (
           <div
             key={index}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              index === currentSlide ? 'opacity-100' : 'opacity-0'
-            }`}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentSlide ? 'opacity-100' : 'opacity-0'
+              }`}
           >
             <img
               src={slide.image}
               alt={slide.subtitle}
-              className={`absolute inset-0 w-full h-full object-cover transition-transform duration-[9000ms] ease-out ${
-                index === currentSlide ? 'scale-110' : 'scale-100'
-              }`}
+              className={`absolute inset-0 w-full h-full object-cover transition-transform duration-[9000ms] ease-out ${index === currentSlide ? 'scale-110' : 'scale-100'
+                }`}
               style={{ objectPosition: slide.position }}
               loading={index === 0 ? 'eager' : 'lazy'}
             />
@@ -90,16 +95,15 @@ export function HeroSection() {
         <ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
       </button>
 
-      {/* 3. SLIDE DOTS (helps orient users since images now sit still under a stable overlay) */}
+      {/* 3. SLIDE DOTS */}
       <div className="absolute bottom-40 md:bottom-48 left-1/2 -translate-x-1/2 z-20 flex gap-2">
         {slides.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}
             aria-label={`Go to slide ${index + 1}`}
-            className={`h-1.5 rounded-full transition-all ${
-              index === currentSlide ? 'w-8 bg-[#b08d57]' : 'w-1.5 bg-white/40 hover:bg-white/70'
-            }`}
+            className={`h-1.5 rounded-full transition-all ${index === currentSlide ? 'w-8 bg-[#b08d57]' : 'w-1.5 bg-white/40 hover:bg-white/70'
+              }`}
           />
         ))}
       </div>
@@ -125,19 +129,31 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* 5. OFFICIAL PARTNERS */}
+      {/* 5. OFFICIAL PARTNERS - SLOW MOTION CONTINUOUS MARQUEE */}
       <div className="absolute bottom-0 left-0 right-0 z-20 flex justify-center px-4">
-        <div className="bg-[#0a1e34] w-full max-w-5xl rounded-t-[2rem] p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl border-t border-white/5">
-          <div className="text-white flex-shrink-0">
-            <h3 className="text-lg md:text-xl font-black leading-tight uppercase">
+        <div className="bg-[#0a1e34] w-full max-w-5xl rounded-t-[2rem] p-5 md:p-7 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 shadow-2xl border-t border-white/5 overflow-hidden">
+          <div className="text-white flex-shrink-0 z-10 bg-[#0a1e34]">
+            <h3 className="text-base md:text-xl font-black leading-tight uppercase tracking-tight">
               Official Partners
             </h3>
           </div>
 
-          <div className="bg-white rounded-xl py-4 px-8 md:px-12 flex justify-around items-center gap-8 md:gap-16 w-full md:w-auto shadow-inner">
-            <img src="/seal_480x480.jpg" alt="MINEDUC" className="h-8 md:h-12 object-contain" />
-            <img src="/logortb.jpg" alt="RTB" className="h-8 md:h-12 object-contain" />
-            <img src="/REB_Logo.png" alt="REB" className="h-8 md:h-12 object-contain" />
+          <div className="bg-white rounded-xl py-3 px-4 md:px-8 overflow-hidden w-full md:w-[620px] shadow-inner relative group">
+            {/* Subtle Gradient Fades on Left & Right Edges */}
+            <div className="absolute left-0 top-0 bottom-0 w-6 md:w-10 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-6 md:w-10 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+
+            {/* Continuous Infinite Slow Motion Marquee */}
+            <div className="flex items-center gap-10 md:gap-14 animate-marquee whitespace-nowrap">
+              {[...partnerLogos, ...partnerLogos, ...partnerLogos, ...partnerLogos].map((partner, index) => (
+                <img
+                  key={index}
+                  src={partner.src}
+                  alt={partner.alt}
+                  className="h-8 md:h-11 object-contain flex-shrink-0 transition-transform duration-300 hover:scale-105"
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -151,6 +167,25 @@ export function HeroSection() {
         @keyframes fadeInUp {
           from { opacity: 0; transform: translateY(30px); }
           to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-marquee {
+          display: flex;
+          width: max-content;
+          animation: slowMarquee 25s linear infinite;
+        }
+
+        .animate-marquee:hover {
+          animation-play-state: paused;
+        }
+
+        @keyframes slowMarquee {
+          0% {
+            transform: translateX(0%);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
         }
       `}</style>
     </section>
