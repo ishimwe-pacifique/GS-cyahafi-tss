@@ -3,53 +3,9 @@
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { Container } from '@/components/layout/Container';
-import { BookOpen, GraduationCap, Target, Mail, Linkedin, Phone, Compass, Award, Lightbulb, Sparkles } from 'lucide-react';
+import { TeamSection } from '@/components/sections/TeamSection';
+import { BookOpen, GraduationCap, Target, Compass } from 'lucide-react';
 import { useEffect } from 'react';
-
-const teamMembers = [
-  {
-    name: "Francoise Nyiraneza Kaburame",
-    role: "Head Teacher",
-    phone: "+250 788 000 000",
-    image: "/team/head-teacher.jpg" // Put your image in public/team/head-teacher.jpg
-  },
-  {
-    name: "Nahimana Didie",
-    role: "DOS General",
-    phone: "+250 788 000 000",
-    image: "/team/dos-general.jpg"
-  },
-  {
-    name: "Tuyumvire Lois",
-    role: "DOS TSS",
-    phone: "+250 788 000 000",
-    image: "/team/dos-tss.jpg"
-  },
-  {
-    name: "Peter",
-    role: "DOD",
-    phone: "+250 788 000 000",
-    image: "/team/dod.jpg"
-  },
-  {
-    name: "BOSCO",
-    role: "Accountant",
-    phone: "+250 788 000 000",
-    image: "/team/accountant.jpg"
-  },
-  {
-    name: "XXXXXXXXX",
-    role: "Secretary",
-    phone: "+250 788 000 000",
-    image: "/team/secretary.jpg"
-  },
-  {
-    name: "Ishimwe Pacifique",
-    role: "IT Support",
-    phone: "+250 784 196 391",
-    image: "/team/it-support.jpg"
-  },
-];
 
 export default function AboutPage() {
   useEffect(() => {
@@ -119,7 +75,6 @@ export default function AboutPage() {
             </div>
 
             <div>
-
               <h2 className="text-2xl md:text-3xl font-bold text-[#0a1e34] uppercase tracking-tight mb-4 border-b-2 border-[#0a1e34] pb-2 inline-block">
                 Our Journey & Evolution
               </h2>
@@ -252,41 +207,8 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      {/* --- LEADERSHIP TEAM --- */}
-      <section id="team" className="py-12 md:py-14 bg-white">
-        <Container>
-          <div className="text-center mb-10">
-            <h2 className="text-2xl md:text-3xl font-bold text-[#0a1e34] uppercase tracking-tight">
-              Meet Our <span className="text-[#b08d57]">Team</span>
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
-            {teamMembers.map((member, i) => (
-              <div key={i} className={`group ${i === 6 ? 'lg:col-start-2 lg:col-span-2 flex items-center gap-8' : ''}`}>
-                <div className={`relative overflow-hidden rounded ${i === 6 ? 'h-64 w-64 flex-shrink-0' : 'h-72 w-full mb-4'}`}>
-                  <img src={member.image} alt={member.name} className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500" />
-                  <div className="absolute inset-0 border-[8px] border-white/0 group-hover:border-white/20 transition-all" />
-                </div>
-                <div className="border-l-2 border-[#b08d57] pl-4">
-                  <h4 className="text-base font-bold text-[#0a1e34] uppercase leading-tight mb-1">{member.name}</h4>
-                  <p className="text-[10px] font-bold text-[#b08d57] uppercase tracking-widest mb-2">{member.role}</p>
-
-                  <div className="flex items-center gap-2 mb-3 text-slate-500 group-hover:text-[#0a1e34] transition-colors">
-                    <Phone size={14} className="text-[#b08d57]" />
-                    <span className="text-xs font-bold">{member.phone}</span>
-                  </div>
-
-                  <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <Mail size={14} className="text-slate-400 hover:text-[#b08d57] cursor-pointer" />
-                    <Linkedin size={14} className="text-slate-400 hover:text-[#b08d57] cursor-pointer" />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
+      {/* --- LEADERSHIP & STAFF TEAM SECTION --- */}
+      <TeamSection />
 
       {/* --- EDUCATIONAL PATHWAYS --- */}
       <section className="py-12 md:py-14 bg-[#0a1e34] text-white">

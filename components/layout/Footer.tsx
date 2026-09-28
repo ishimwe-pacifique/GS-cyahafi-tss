@@ -3,11 +3,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Container } from './Container';
-import { 
-  Facebook, 
-  Instagram, 
-  Linkedin, 
-  Youtube 
+import {
+  Facebook,
+  Instagram,
+  Linkedin,
+  Youtube
 } from 'lucide-react';
 
 export function Footer() {
@@ -27,11 +27,11 @@ export function Footer() {
   const socialLinks = [
     { icon: <Facebook size={18} />, href: '#', label: 'Facebook', hover: 'hover:bg-blue-600' },
     // Replaced Twitter icon/label with X and black hover style
-    { 
-      icon: <span className="font-sans font-bold text-base leading-none">X</span>, 
-      href: '#', 
-      label: 'X (Twitter)', 
-      hover: 'hover:bg-[#000000]' 
+    {
+      icon: <span className="font-sans font-bold text-base leading-none">X</span>,
+      href: '#',
+      label: 'X (Twitter)',
+      hover: 'hover:bg-[#000000]'
     },
     { icon: <Instagram size={18} />, href: '#', label: 'Instagram', hover: 'hover:bg-pink-600' },
     { icon: <Youtube size={18} />, href: '#', label: 'YouTube', hover: 'hover:bg-[#FF0000]' },
@@ -46,12 +46,12 @@ export function Footer() {
           <div className="space-y-6">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <Image 
-                  src="/logocyaha.png" 
-                  alt="GS Cyahafi TSS Logo" 
-                  width={40} 
-                  height={40} 
-                  className="object-contain" 
+                <Image
+                  src="/logocyaha.png"
+                  alt="GS Cyahafi TSS Logo"
+                  width={40}
+                  height={40}
+                  className="object-contain"
                 />
                 <span className="font-bold text-lg">GS Cyahafi TSS</span>
               </div>
@@ -106,7 +106,7 @@ export function Footer() {
               </li>
               <li className="flex flex-col">
                 <span className="text-xs font-bold uppercase text-accent/80">Email</span>
-                <span>gscyahafi@gmail.com</span>
+                <span>groupescolairecyahafi@gmail.com</span>
               </li>
               <li className="flex flex-col">
                 <span className="text-xs font-bold uppercase text-accent/80">Location</span>
@@ -121,7 +121,7 @@ export function Footer() {
             <ul className="space-y-3 text-sm text-primary-foreground/70">
               {footerPrograms.map((program) => (
                 <li key={program} className="flex items-center gap-2">
-                   <span className="h-1 w-1 rounded-full bg-accent"></span>
+                  <span className="h-1 w-1 rounded-full bg-accent"></span>
                   {program}
                 </li>
               ))}

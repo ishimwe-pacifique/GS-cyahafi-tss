@@ -9,7 +9,7 @@ const montserrat = Montserrat({ subsets: ['latin'], variable: '--font-montserrat
 
 export const metadata: Metadata = {
   title: 'GS Cyahafi TSS',
-  description: 'Created with v0',
+  description: 'Created by developer pacifique',
   generator: 'paccy IT',
   icons: {
     icon: '/logocyaha.png',
