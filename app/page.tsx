@@ -13,7 +13,7 @@ export default function Home() {
       <LatestGallerySection />
       <TestimonialSection />
       <StoriesSection />
-      
+
       <Footer />
     </div>
   );

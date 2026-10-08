@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Container } from '../layout/Container';
-import { Button } from '../ui/Button';
+import { Button } from '../ui/button';
 
 export function ContactSection() {
   const [formData, setFormData] = useState({

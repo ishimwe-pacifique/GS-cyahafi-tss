@@ -26,9 +26,9 @@ export default function ContactPage() {
       {/* --- HERO SECTION: BOLD ARCHITECTURAL --- */}
       <section className="relative pt-16 pb-24 bg-[#0a1e34] text-white overflow-hidden">
         <div className="absolute inset-0 z-0 opacity-20 grayscale">
-           <img 
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gs%20image1-1QLrdTn8kYjz4ox5DCoqCEZdvfZxXj.jpeg" 
-            alt="Background" 
+          <img
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gs%20image1-1QLrdTn8kYjz4ox5DCoqCEZdvfZxXj.jpeg"
+            alt="Background"
             className="w-full h-full object-cover"
           />
         </div>
@@ -52,7 +52,7 @@ export default function ContactPage() {
             {[
               { icon: MapPin, title: "Address", detail: ["Kabahizi, Gitega", "Nyarugenge, Kigali", "Rwanda"] },
               { icon: Phone, title: "Phone", detail: ["+250 722 792 705", "Mon-Fri, 8AM-5PM"] },
-              { icon: Mail, title: "Email", detail: ["gscyahafi@gmail.com", ""] },
+              { icon: Mail, title: "Email", detail: ["groupescolairecyahafi@gmail.com", ""] },
               { icon: Clock, title: "Hours", detail: ["Mon-Fri: 8AM-5PM", "Sat: 9AM-12PM"] }
             ].map((item, i) => (
               <div key={i} className="p-10 border-r border-b border-slate-200 hover:bg-slate-50 transition-colors">
@@ -137,7 +137,7 @@ export default function ContactPage() {
 
             {/* --- MAP SECTION: KEPT AS IS BUT STYLED SHARP --- */}
             <div className="mt-12">
-               <div className="border-4 border-[#0a1e34] overflow-hidden shadow-2xl">
+              <div className="border-4 border-[#0a1e34] overflow-hidden shadow-2xl">
                 <div className="w-full h-96 bg-slate-200 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-700">
                   <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.814188079439!2d30.0531343!3d-1.944869!2m3!1f0!2f90!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19dca53ee02e53e3%3A0xebc558398f713cf6!2sCyahafi%20High%20School!5e0!3m2!1sen!2srw!16s%2Fg%2F11h94ys1p9"

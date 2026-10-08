@@ -15,7 +15,6 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useScrollToSection } from '@/hooks/useScrollToSection';
 import { Container } from './Container';
 import { Button } from '../ui/button';
 
@@ -24,11 +23,10 @@ export function Navigation() {
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isPagesOpen, setIsPagesOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const scrollToSection = useScrollToSection();
 
   useEffect(() => {
     const handleScroll = () => {
-      // Switches appearance when user scrolls past the top banner
+      // Switches appearance when user scrolls past top banner
       setIsScrolled(window.scrollY > 70);
     };
 
@@ -37,16 +35,11 @@ export function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (sectionId: string) => {
-    scrollToSection(sectionId);
-    setIsMenuOpen(false);
-  };
-
   const navItems = [
     { label: 'Home', href: '/' },
     { label: 'About', href: '/about', hasDropdown: true },
-    { label: 'Academic Levels', id: 'levels' },
-    { label: 'TVET Programs', id: 'tvet' },
+    { label: 'Academic Levels', href: '/academic-levels' },
+    { label: 'TVET Programs', href: '/tvet-programs' },
     { label: 'Gallery', href: '/gallery' },
     { label: 'Pages', href: '/pages', hasDropdown: true },
   ];
@@ -137,12 +130,13 @@ export function Navigation() {
         </Container>
       </div>
 
-      {/* 2. MAIN NAVBAR (LOCKED & STICKY AT TOP) */}
+      {/* 2. MAIN NAVBAR (STICKY AT TOP) */}
       <header
-        className={`sticky top-0 z-50 w-full font-montserrat transition-all duration-300 ${isScrolled
-          ? 'bg-[#0a1e34]/95 backdrop-blur-md shadow-xl border-b border-[#b08d57]/30'
-          : 'bg-[#0a1e34] shadow-md border-b border-slate-800'
-          }`}
+        className={`sticky top-0 z-50 w-full font-montserrat transition-all duration-300 ${
+          isScrolled
+            ? 'bg-[#0a1e34]/95 backdrop-blur-md shadow-xl border-b border-[#b08d57]/30'
+            : 'bg-[#0a1e34] shadow-md border-b border-slate-800'
+        }`}
       >
         <Container>
           <div className="flex justify-between items-center h-16">
@@ -163,62 +157,65 @@ export function Navigation() {
             {/* Desktop Navigation Links */}
             <nav className="hidden md:flex items-center gap-6 lg:gap-8">
               {navItems.map((item) => {
-                const isLink = 'href' in item;
-
+                // 1. ABOUT DROPDOWN
                 if (item.hasDropdown && item.label === 'About') {
                   return (
                     <div key={item.label} className="relative group py-2">
-                      <button className="flex items-center gap-1 text-slate-100 hover:text-[#b08d57] font-semibold text-sm transition-colors">
+                      <Link
+                        href="/about"
+                        className="flex items-center gap-1 text-slate-100 hover:text-[#b08d57] font-semibold text-sm transition-colors"
+                      >
                         {item.label}
-                        <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
-                      </button>
-                      <div className="absolute top-full left-0 mt-1 w-48 bg-[#0a1e34] border border-slate-700 rounded-lg shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50 overflow-hidden">
+                        <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180 text-[#b08d57]" />
+                      </Link>
+                      <div className="absolute top-full left-0 mt-1 w-52 bg-[#0a1e34] border border-slate-700 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50 overflow-hidden">
                         <Link
                           href="/about"
-                          className="block px-4 py-2.5 text-sm text-slate-200 hover:bg-[#b08d57] hover:text-white transition-colors"
+                          className="block px-4 py-3 text-xs font-semibold text-slate-200 hover:bg-[#b08d57] hover:text-white transition-colors"
                         >
-                          About School
+                          About School Overview
                         </Link>
                         <Link
                           href="/about#team"
-                          className="block px-4 py-2.5 text-sm text-slate-200 hover:bg-[#b08d57] hover:text-white transition-colors"
+                          className="block px-4 py-3 text-xs font-semibold text-slate-200 hover:bg-[#b08d57] hover:text-white transition-colors border-t border-slate-800"
                         >
-                          Meet Our Team
+                          Meet Our Leadership & Team
                         </Link>
                       </div>
                     </div>
                   );
                 }
 
+                // 2. PAGES DROPDOWN
                 if (item.hasDropdown && item.label === 'Pages') {
                   return (
                     <div key={item.label} className="relative group py-2">
                       <button className="flex items-center gap-1 text-slate-100 hover:text-[#b08d57] font-semibold text-sm transition-colors">
                         {item.label}
-                        <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
+                        <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180 text-[#b08d57]" />
                       </button>
-                      <div className="absolute top-full left-0 mt-1 w-48 bg-[#0a1e34] border border-slate-700 rounded-lg shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50 overflow-hidden">
+                      <div className="absolute top-full left-0 mt-1 w-48 bg-[#0a1e34] border border-slate-700 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50 overflow-hidden">
                         <Link
                           href="/pages/quizzes"
-                          className="block px-4 py-2.5 text-sm text-slate-200 hover:bg-[#b08d57] hover:text-white transition-colors"
+                          className="block px-4 py-2.5 text-xs font-semibold text-slate-200 hover:bg-[#b08d57] hover:text-white transition-colors"
                         >
                           Quizzes
                         </Link>
                         <Link
                           href="/pages/exams"
-                          className="block px-4 py-2.5 text-sm text-slate-200 hover:bg-[#b08d57] hover:text-white transition-colors"
+                          className="block px-4 py-2.5 text-xs font-semibold text-slate-200 hover:bg-[#b08d57] hover:text-white transition-colors"
                         >
-                          Exams
+                          Exams & Papers
                         </Link>
                         <Link
                           href="/pages/documents"
-                          className="block px-4 py-2.5 text-sm text-slate-200 hover:bg-[#b08d57] hover:text-white transition-colors"
+                          className="block px-4 py-2.5 text-xs font-semibold text-slate-200 hover:bg-[#b08d57] hover:text-white transition-colors"
                         >
-                          Documents
+                          Official Documents
                         </Link>
                         <Link
                           href="/pages/announcements"
-                          className="block px-4 py-2.5 text-sm text-slate-200 hover:bg-[#b08d57] hover:text-white transition-colors"
+                          className="block px-4 py-2.5 text-xs font-semibold text-slate-200 hover:bg-[#b08d57] hover:text-white transition-colors"
                         >
                           Announcements
                         </Link>
@@ -227,7 +224,8 @@ export function Navigation() {
                   );
                 }
 
-                return isLink ? (
+                // Standard Direct Link (Academic Levels, TVET Programs, Home, Gallery)
+                return (
                   <Link
                     key={item.label}
                     href={item.href}
@@ -235,23 +233,15 @@ export function Navigation() {
                   >
                     {item.label}
                   </Link>
-                ) : (
-                  <button
-                    key={item.id}
-                    onClick={() => handleNavClick(item.id)}
-                    className="text-slate-100 hover:text-[#b08d57] font-semibold text-sm transition-colors"
-                  >
-                    {item.label}
-                  </button>
                 );
               })}
 
               {/* Action Buttons */}
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 ml-2">
                 <Link href="/contact">
                   <Button
                     variant="primary"
-                    className="text-xs font-bold uppercase tracking-wider bg-[#b08d57] hover:bg-[#9a7b4c] text-white px-5 py-2.5 rounded-sm shadow-md transition-all active:scale-95"
+                    className="text-xs font-bold uppercase tracking-wider bg-[#b08d57] hover:bg-[#9a7b4c] text-white px-5 py-2.5 rounded-xl shadow-md transition-all active:scale-95"
                   >
                     Contact Us
                   </Button>
@@ -259,7 +249,7 @@ export function Navigation() {
                 <Link href="/admin/login">
                   <Button
                     variant="outline"
-                    className="text-xs font-bold uppercase tracking-wider border-[#b08d57] text-[#b08d57] hover:bg-[#b08d57] hover:text-white px-4 py-2 rounded-sm transition-all active:scale-95"
+                    className="text-xs font-bold uppercase tracking-wider border-[#b08d57] text-[#b08d57] hover:bg-[#b08d57] hover:text-white px-4 py-2 rounded-xl transition-all active:scale-95"
                   >
                     Login
                   </Button>
@@ -303,24 +293,22 @@ export function Navigation() {
               </div>
 
               {navItems.map((item) => {
-                const isLink = 'href' in item;
-
-                if (item.hasDropdown && item.label === 'About') {
+                if (item.label === 'About') {
                   return (
                     <div key={item.label}>
                       <button
                         onClick={() => setIsAboutOpen(!isAboutOpen)}
-                        className="flex items-center justify-between w-full text-left font-semibold hover:text-[#b08d57] transition-colors py-1"
+                        className="flex items-center justify-between w-full text-left font-semibold text-white hover:text-[#b08d57] transition-colors py-1"
                       >
                         {item.label}
-                        <ChevronDown className={`w-4 h-4 transition-transform ${isAboutOpen ? 'rotate-180' : ''}`} />
+                        <ChevronDown className={`w-4 h-4 transition-transform text-[#b08d57] ${isAboutOpen ? 'rotate-180' : ''}`} />
                       </button>
                       {isAboutOpen && (
                         <div className="ml-4 mt-2 flex flex-col gap-2 border-l-2 border-[#b08d57] pl-4">
-                          <Link href="/about" className="hover:text-[#b08d57] text-sm py-1" onClick={() => setIsMenuOpen(false)}>
-                            About School
+                          <Link href="/about" className="hover:text-[#b08d57] text-sm py-1 text-slate-300" onClick={() => setIsMenuOpen(false)}>
+                            About School Overview
                           </Link>
-                          <Link href="/about#team" className="hover:text-[#b08d57] text-sm py-1" onClick={() => setIsMenuOpen(false)}>
+                          <Link href="/about#team" className="hover:text-[#b08d57] text-sm py-1 text-slate-300" onClick={() => setIsMenuOpen(false)}>
                             Meet Our Team
                           </Link>
                         </div>
@@ -329,28 +317,28 @@ export function Navigation() {
                   );
                 }
 
-                if (item.hasDropdown && item.label === 'Pages') {
+                if (item.label === 'Pages') {
                   return (
                     <div key={item.label}>
                       <button
                         onClick={() => setIsPagesOpen(!isPagesOpen)}
-                        className="flex items-center justify-between w-full text-left font-semibold hover:text-[#b08d57] transition-colors py-1"
+                        className="flex items-center justify-between w-full text-left font-semibold text-white hover:text-[#b08d57] transition-colors py-1"
                       >
                         {item.label}
-                        <ChevronDown className={`w-4 h-4 transition-transform ${isPagesOpen ? 'rotate-180' : ''}`} />
+                        <ChevronDown className={`w-4 h-4 transition-transform text-[#b08d57] ${isPagesOpen ? 'rotate-180' : ''}`} />
                       </button>
                       {isPagesOpen && (
                         <div className="ml-4 mt-2 flex flex-col gap-2 border-l-2 border-[#b08d57] pl-4">
-                          <Link href="/pages/quizzes" className="hover:text-[#b08d57] text-sm py-1" onClick={() => setIsMenuOpen(false)}>
+                          <Link href="/pages/quizzes" className="hover:text-[#b08d57] text-sm py-1 text-slate-300" onClick={() => setIsMenuOpen(false)}>
                             Quizzes
                           </Link>
-                          <Link href="/pages/exams" className="hover:text-[#b08d57] text-sm py-1" onClick={() => setIsMenuOpen(false)}>
+                          <Link href="/pages/exams" className="hover:text-[#b08d57] text-sm py-1 text-slate-300" onClick={() => setIsMenuOpen(false)}>
                             Exams
                           </Link>
-                          <Link href="/pages/documents" className="hover:text-[#b08d57] text-sm py-1" onClick={() => setIsMenuOpen(false)}>
+                          <Link href="/pages/documents" className="hover:text-[#b08d57] text-sm py-1 text-slate-300" onClick={() => setIsMenuOpen(false)}>
                             Documents
                           </Link>
-                          <Link href="/pages/announcements" className="hover:text-[#b08d57] text-sm py-1" onClick={() => setIsMenuOpen(false)}>
+                          <Link href="/pages/announcements" className="hover:text-[#b08d57] text-sm py-1 text-slate-300" onClick={() => setIsMenuOpen(false)}>
                             Announcements
                           </Link>
                         </div>
@@ -359,34 +347,26 @@ export function Navigation() {
                   );
                 }
 
-                return isLink ? (
+                return (
                   <Link
                     key={item.label}
                     href={item.href}
-                    className="text-left font-semibold hover:text-[#b08d57] transition-colors py-1"
+                    className="text-left font-semibold text-white hover:text-[#b08d57] transition-colors py-1"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {item.label}
                   </Link>
-                ) : (
-                  <button
-                    key={item.id}
-                    onClick={() => handleNavClick(item.id)}
-                    className="text-left font-semibold hover:text-[#b08d57] transition-colors py-1"
-                  >
-                    {item.label}
-                  </button>
                 );
               })}
 
               <div className="flex items-center gap-3 pt-3">
                 <Link href="/contact" onClick={() => setIsMenuOpen(false)} className="flex-1">
-                  <Button variant="primary" className="text-xs font-bold uppercase tracking-wider bg-[#b08d57] text-white w-full py-3">
+                  <Button variant="primary" className="text-xs font-bold uppercase tracking-wider bg-[#b08d57] text-white w-full py-3 rounded-xl">
                     Contact Us
                   </Button>
                 </Link>
                 <Link href="/admin/login" onClick={() => setIsMenuOpen(false)} className="flex-1">
-                  <Button variant="outline" className="text-xs font-bold uppercase tracking-wider border-[#b08d57] text-[#b08d57] hover:bg-[#b08d57] hover:text-white w-full py-3">
+                  <Button variant="outline" className="text-xs font-bold uppercase tracking-wider border-[#b08d57] text-[#b08d57] hover:bg-[#b08d57] hover:text-white w-full py-3 rounded-xl">
                     Login
                   </Button>
                 </Link>

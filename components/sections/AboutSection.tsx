@@ -1,7 +1,7 @@
 import { Users, BookOpen, GraduationCap } from 'lucide-react';
 import { Container } from '../layout/Container';
 import { SectionHeader } from '../ui/SectionHeader';
-import { Card } from '../ui/Card';
+import { Card } from '../ui/card';
 
 export function AboutSection() {
   const values = [
